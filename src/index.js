@@ -6,6 +6,9 @@ import { handleInput } from './handleInput.js';
 import handleLs from './ls.js';
 import handleUp from './up.js';
 import { homedir } from 'os';
+import handleCd from './cd.js';
+import handleHash from './hash.js';
+import handleCat from './cat.js';
 
 const args = Object.fromEntries(
   argv.slice(2).map((arg) => {
@@ -19,7 +22,12 @@ console.log(`Welcome to the File Manager, ${userName}!`);
 displayCurDir();
 
 const eventEmitter = new EventEmitter();
-eventEmitter.on('up', handleUp).on('ls', handleLs);
+eventEmitter
+  .on('up', handleUp)
+  .on('ls', handleLs)
+  .on('cd', handleCd)
+  .on('hash', handleHash)
+  .on('cat', handleCat);
 
 // const userHomeDir = homedir();
 // eventEmitter.emit(chdir(userHomeDir));

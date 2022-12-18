@@ -20,7 +20,7 @@ export default async function handleLs() {
 
     console.table(obj);
     displayCurDir();
-  } catch (err) {
+  } catch (error) {
     console.error('Operation failed');
   }
 }
