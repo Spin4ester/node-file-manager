@@ -9,6 +9,8 @@ import { homedir } from 'os';
 import handleCd from './cd.js';
 import handleHash from './hash.js';
 import handleCat from './cat.js';
+import handleRn from './rn.js';
+import handleRm from './rm.js';
 
 const args = Object.fromEntries(
   argv.slice(2).map((arg) => {
@@ -27,7 +29,9 @@ eventEmitter
   .on('ls', handleLs)
   .on('cd', handleCd)
   .on('hash', handleHash)
-  .on('cat', handleCat);
+  .on('cat', handleCat)
+  .on('rn', handleRn)
+  .on('rm', handleRm);
 
 // const userHomeDir = homedir();
 // eventEmitter.emit(chdir(userHomeDir));

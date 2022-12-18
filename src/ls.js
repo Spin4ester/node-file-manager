@@ -9,15 +9,12 @@ export default async function handleLs() {
     const curDir = resolve(cwd());
     const files = await readdir(curDir);
     const checkDir = await Promise.all(files.map((el) => isDir(el)));
-    console.log(checkDir);
     const obj = files.map((el) => {
       return {
         Name: el,
         Type: checkDir[files.indexOf(el)] === true ? 'directory' : 'file',
       };
     });
-    console.log(obj);
-
     console.table(obj);
     displayCurDir();
   } catch (error) {
