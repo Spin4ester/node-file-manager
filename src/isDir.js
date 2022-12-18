@@ -9,7 +9,7 @@ import path from 'path';
 
 export default async function isDir(path) {
   try {
-    path = resolve(cwd(), path);
+    path = resolve(path);
     const stats = await stat(path);
     return stats.isDirectory();
   } catch (error) {

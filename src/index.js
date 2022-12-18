@@ -11,6 +11,11 @@ import handleHash from './hash.js';
 import handleCat from './cat.js';
 import handleRn from './rn.js';
 import handleRm from './rm.js';
+import handleAdd from './add.js';
+import handleCp from './cp.js';
+import handleMv from './mv.js';
+import handleCompress from './compress.js';
+import handleDecompress from './decompress.js';
 
 const args = Object.fromEntries(
   argv.slice(2).map((arg) => {
@@ -31,7 +36,12 @@ eventEmitter
   .on('hash', handleHash)
   .on('cat', handleCat)
   .on('rn', handleRn)
-  .on('rm', handleRm);
+  .on('rm', handleRm)
+  .on('add', handleAdd)
+  .on('cp', handleCp)
+  .on('mv', handleMv)
+  .on('compress', handleCompress)
+  .on('decompress', handleDecompress);
 
 // const userHomeDir = homedir();
 // eventEmitter.emit(chdir(userHomeDir));
