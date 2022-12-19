@@ -5,7 +5,7 @@ import { arch } from 'node:process';
 export default async function handleOs([data]) {
   try {
     if (!data) {
-      console.log('Please specify the parameter');
+      console.log('Invalid input. Please specify the parameter');
     } else {
       const { username, homedir } = userInfo();
       const cpusStat = cpus().map(({ model, speed }) => {

@@ -13,7 +13,7 @@ export default async function handleDecompress([pathFile, pathDir]) {
     const isNotFile = !(await isFile(pathFile));
 
     if (isNotDir || isNotFile) {
-      console.log('Please write source file and destination directory!');
+      console.log('Invalid input');
     } else {
       pathFile = resolve(pathFile);
       const { name, ext } = parse(pathFile);
@@ -23,7 +23,7 @@ export default async function handleDecompress([pathFile, pathDir]) {
       if (!ext.includes('.br')) {
         console.log('Can not decompress this file');
       } else if (!doesNotExist) {
-        console.log('File already exist');
+        console.log('File with this name already exist');
       } else {
         const readableStream = createReadStream(pathFile);
         const writableStream = createWriteStream(pathDir);

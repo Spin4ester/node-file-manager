@@ -9,7 +9,7 @@ export default async function handleHash([path]) {
     path = resolve(path);
     const isNotFile = !(await isFile(path));
     if (isNotFile) {
-      console.log('This is not a file');
+      console.log('Invalid input');
     } else {
       fs.readFile(path, (err, data) => {
         const hashHex = createHash('sha3-256').update(data).digest('hex');

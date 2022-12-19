@@ -10,7 +10,7 @@ export default async function handleRn([path, fileName]) {
     };
     if (checkSymbols()) {
       console.log(
-        'Usage of forbidden symbols is prohibited: /, :, *, ?, ", <, >, |, '
+        'Invalid input. Usage of /, :, *, ?, ", <, >, | is prohibited.'
       );
     } else {
       path = resolve(path);

@@ -25,7 +25,7 @@ const args = Object.fromEntries(
   })
 );
 
-const userName = args['--username'] ? args['--username'] : 'anonymous';
+const userName = args['--username'] ? args['--username'] : 'Anonymous';
 console.log(`Welcome to the File Manager, ${userName}!`);
 
 const eventEmitter = new EventEmitter();
@@ -44,8 +44,8 @@ eventEmitter
   .on('decompress', handleDecompress)
   .on('os', handleOs);
 
-const userHomeDir = homedir();
-eventEmitter.emit(chdir(userHomeDir));
+// const userHomeDir = homedir();
+// eventEmitter.emit(chdir(userHomeDir));
 displayCurDir();
 
 const rl = readline.createInterface(stdin, stdout);
