@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import { open } from 'node:fs/promises';
-import displayCurDir from './displayCurDir.js';
+import displayCurDir from '../utils/displayCurDir.js';
 import { cwd } from 'node:process';
 
 export default async function handleAdd([fileName]) {

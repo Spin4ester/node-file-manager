@@ -1,15 +1,16 @@
-import { unlink } from 'node:fs/promises';
 import { createReadStream, createWriteStream } from 'node:fs';
 import { parse, resolve } from 'node:path';
 import { pipeline } from 'node:stream/promises';
-import displayCurDir from './displayCurDir.js';
-import isDir from './isDir.js';
+import displayCurDir from '../utils/displayCurDir.js';
+import isDir from '../utils/isDir.js';
+import isFile from '../utils/isFile.js';
 
-export default async function handleMv([pathFile, pathDir]) {
+export default async function handleCp([pathFile, pathDir]) {
   try {
     const isNotDir = !(await isDir(pathDir));
-    console.log(pathDir, isNotDir);
-    if (isNotDir) {
+    const isNotFile = !(await isFile(pathFile));
+
+    if (isNotDir || isNotFile) {
       console.log('Invalid input');
     } else {
       pathFile = resolve(pathFile);
@@ -18,7 +19,7 @@ export default async function handleMv([pathFile, pathDir]) {
       const readableStream = createReadStream(pathFile);
       const writableStream = createWriteStream(pathDir);
       await pipeline(readableStream, writableStream);
-      await unlink(pathFile);
+      console.log('File successfully copied!');
       displayCurDir();
     }
   } catch (error) {

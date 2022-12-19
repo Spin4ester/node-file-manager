@@ -15,7 +15,7 @@ export async function handleInput(eventEmitter, input) {
     } else if (twoArgAction.some((el) => el === action) && args.length === 2) {
       eventEmitter.emit(action, args);
     } else {
-      throw new Error('Invalid input');
+      console.log('Invalid input');
     }
   } catch (err) {
     console.error('Operation failed');

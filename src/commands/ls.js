@@ -1,8 +1,8 @@
-import displayCurDir from './displayCurDir.js';
 import { cwd } from 'node:process';
 import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import isDir from './isDir.js';
+import displayCurDir from '../utils/displayCurDir.js';
+import isDir from '../utils/isDir.js';
 
 export default async function handleLs() {
   try {

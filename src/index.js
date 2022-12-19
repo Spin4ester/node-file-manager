@@ -1,21 +1,22 @@
 import EventEmitter from 'node:events';
 import { argv, chdir, exit, stdin, stdout } from 'node:process';
 import readline from 'node:readline';
-import displayCurDir from './displayCurDir.js';
+import displayCurDir from './utils/displayCurDir.js';
 import { handleInput } from './handleInput.js';
-import handleLs from './ls.js';
-import handleUp from './up.js';
+import handleLs from './commands/ls.js';
+import handleUp from './commands/up.js';
 import { homedir } from 'os';
-import handleCd from './cd.js';
-import handleHash from './hash.js';
-import handleCat from './cat.js';
-import handleRn from './rn.js';
-import handleRm from './rm.js';
-import handleAdd from './add.js';
-import handleCp from './cp.js';
-import handleMv from './mv.js';
-import handleCompress from './compress.js';
-import handleDecompress from './decompress.js';
+import handleCd from './commands/cd.js';
+import handleHash from './commands/hash.js';
+import handleCat from './commands/cat.js';
+import handleRn from './commands/rn.js';
+import handleRm from './commands/rm.js';
+import handleAdd from './commands/add.js';
+import handleCp from './commands/cp.js';
+import handleMv from './commands/mv.js';
+import handleCompress from './commands/compress.js';
+import handleDecompress from './commands/decompress.js';
+import handleOs from './commands/os.js';
 
 const args = Object.fromEntries(
   argv.slice(2).map((arg) => {
@@ -26,7 +27,6 @@ const args = Object.fromEntries(
 
 const userName = args['--username'] ? args['--username'] : 'anonymous';
 console.log(`Welcome to the File Manager, ${userName}!`);
-displayCurDir();
 
 const eventEmitter = new EventEmitter();
 eventEmitter
@@ -41,18 +41,14 @@ eventEmitter
   .on('cp', handleCp)
   .on('mv', handleMv)
   .on('compress', handleCompress)
-  .on('decompress', handleDecompress);
+  .on('decompress', handleDecompress)
+  .on('os', handleOs);
 
-// const userHomeDir = homedir();
-// eventEmitter.emit(chdir(userHomeDir));
+const userHomeDir = homedir();
+eventEmitter.emit(chdir(userHomeDir));
+displayCurDir();
 
 const rl = readline.createInterface(stdin, stdout);
-
-// process.on('exit', () => {
-//   console.log(`Thank you for using File Manager, ${userName}!`);
-//   exit(0);
-// });
-// process.on('SIGINT', () => exit(0));
 
 rl.on('line', handleInput.bind(rl, eventEmitter)).on('close', () => {
   console.log(`Thank you for using File Manager, ${userName}!`);

@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import { resolve } from 'node:path';
 import { pipeline } from 'node:stream/promises';
-import displayCurDir from './displayCurDir.js';
-import streamToString from './streamToString.js';
+import displayCurDir from '../utils/displayCurDir.js';
+import streamToString from '../utils/streamToString.js';
 
 export default async function handleCat([path]) {
   try {

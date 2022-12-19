@@ -1,9 +1,9 @@
 import { chdir } from 'node:process';
-import displayCurDir from './displayCurDir.js';
+import displayCurDir from '../utils/displayCurDir.js';
 
-export default async function handleCd([path]) {
+export default async function handleUp() {
   try {
-    chdir(path);
+    chdir('..');
     displayCurDir();
   } catch (error) {
     console.error('Operation failed');

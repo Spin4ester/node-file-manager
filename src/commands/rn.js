@@ -1,6 +1,6 @@
 import { rename } from 'node:fs/promises';
 import { resolve, parse } from 'node:path';
-import displayCurDir from './displayCurDir.js';
+import displayCurDir from '../utils/displayCurDir.js';
 
 export default async function handleRn([path, fileName]) {
   try {
@@ -9,12 +9,15 @@ export default async function handleRn([path, fileName]) {
       return fileName.split('').some((el) => forbiddenSymbols.includes(el));
     };
     if (checkSymbols()) {
-      console.log('Invalid file name');
+      console.log(
+        'Usage of forbidden symbols is prohibited: /, :, *, ?, ", <, >, |, '
+      );
     } else {
       path = resolve(path);
       const { dir } = parse(path);
       const pathFromFile = resolve(dir, fileName);
       await rename(path, pathFromFile);
+      console.log('File successfully renamed!');
       displayCurDir();
     }
   } catch (error) {

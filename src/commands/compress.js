@@ -2,9 +2,9 @@ import { parse, resolve } from 'node:path';
 import { createBrotliCompress } from 'node:zlib';
 import { createReadStream, createWriteStream } from 'node:fs';
 import { pipeline } from 'node:stream/promises';
-import displayCurDir from './displayCurDir.js';
-import isDir from './isDir.js';
-import isFile from './isFile.js';
+import displayCurDir from '../utils/displayCurDir.js';
+import isDir from '../utils/isDir.js';
+import isFile from '../utils/isFile.js';
 
 export default async function handleCompress([pathFile, pathDir]) {
   try {
@@ -24,6 +24,7 @@ export default async function handleCompress([pathFile, pathDir]) {
       const brotliCompress = createBrotliCompress();
 
       await pipeline(readableStream, brotliCompress, writableStream);
+      console.log('File successfully compressed!');
       displayCurDir();
     }
   } catch (error) {
