@@ -44,8 +44,8 @@ eventEmitter
   .on('decompress', handleDecompress)
   .on('os', handleOs);
 
-// const userHomeDir = homedir();
-// eventEmitter.emit(chdir(userHomeDir));
+const userHomeDir = homedir();
+eventEmitter.emit(chdir(userHomeDir));
 displayCurDir();
 
 const rl = readline.createInterface(stdin, stdout);
